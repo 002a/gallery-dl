@@ -42,6 +42,8 @@ class MastodonExtractor(BaseExtractor):
 
             attachments = status["media_attachments"]
             del status["media_attachments"]
+            if ("reblog" in status) and (status["reblog"] is not None) and ("media_attachments" in status["reblog"]) and (status["reblog"]["media_attachments"] is not None):
+                attachments += status["reblog"]["media_attachments"]
 
             status["instance"] = self.instance
             acct = status["account"]["acct"]
